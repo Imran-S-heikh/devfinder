@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 246 248 255;
+  --surface: 254 254 254;
+  --primary: 0 121 255;
+  --text: 43 52 66;
+  --text-muted: 75 106 155;
+  --secondary: 105 124 154;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 20 29 47;
+    --surface: 30 42 71;
+    --text: 255 255 255;
+    --text-muted: 255 255 255;
+    --secondary: 255 255 255;
+  }
+}
+
+html.dark {
+  --background: 20 29 47;
+  --surface: 30 42 71;
+  --text: 255 255 255;
+  --text-muted: 255 255 255;
+  --secondary: 255 255 255;
+}
+
+html.light {
+  --background: 246 248 255;
+  --surface: 254 254 254;
+  --text: 43 52 66;
+  --text-muted: 75 106 155;
+  --secondary: 105 124 154;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
