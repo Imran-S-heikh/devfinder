@@ -1,4 +1,7 @@
 export function isSystemDark() {
+  if (isServer()) {
+    return false;
+  }
   return window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
@@ -96,3 +99,7 @@ export const defaultProfile: Profile = {
   github: "https://github.com/Imran-S-heikh",
   location: "Bangladesh",
 };
+
+export function isServer() {
+  return typeof window === "undefined";
+}

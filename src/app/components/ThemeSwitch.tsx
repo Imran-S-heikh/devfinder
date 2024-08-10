@@ -2,7 +2,7 @@
 
 import { IconMoon, IconSun } from "@/assets/icons";
 import Hide from "@/components/Hide";
-import { isSystemDark } from "@/utils";
+import { isServer, isSystemDark } from "@/utils";
 import { Fragment, useEffect, useState } from "react";
 
 function ThemeSwitch() {
@@ -21,12 +21,15 @@ function ThemeSwitch() {
   }, [dark]);
 
   useEffect(() => {
+    if (isServer()) {
+      return;
+    }
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (e) => {
         setDark(e.matches);
       });
-  });
+  }, []);
 
   function handleThemeChange() {
     setDark((pre) => !pre);
