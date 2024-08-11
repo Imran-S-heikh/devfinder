@@ -3,7 +3,7 @@
 import { IconMoon, IconSun } from "@/assets/icons";
 import Hide from "@/components/Hide";
 import { isServer, isSystemDark } from "@/utils";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 
 function ThemeSwitch() {
   const [dark, setDark] = useState(isSystemDark());
@@ -20,15 +20,19 @@ function ThemeSwitch() {
     }
   }, [dark]);
 
+  const handleCallback = useCallback((e: MediaQueryListEvent) => {
+    setDark(e.matches);
+  }, []);
+
   useEffect(() => {
     if (isServer()) {
       return;
     }
     window
       .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (e) => {
-        setDark(e.matches);
-      });
+      .addEventListener("change", handleCallback);
+
+    return () => window.removeEventListener("change", handleCallback as any);
   }, []);
 
   function handleThemeChange() {

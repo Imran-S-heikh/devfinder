@@ -27,6 +27,7 @@ export default function Home() {
   async function handleGetProfile() {
     setLoading(true);
     const data = await getProfile(username || "Imran-S-heikh");
+    setUsername("");
     if (data) {
       console.log(data);
       setLoading(false);
@@ -50,10 +51,12 @@ export default function Home() {
         <div className="w-full flex">
           <div className="flex-1 relative flex items-center">
             <input
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="flex-1 outline-none bg-red text-lg text-muted bg-transparent absolute inset-0 pl-12"
               type="text"
               placeholder="Search GitHub username"
+              onKeyUp={(e) => e.key === "Enter" && handleGetProfile()}
             />
             <span className="absolute text-[#F74646] font-bold right-5">
               {errorStatus}
