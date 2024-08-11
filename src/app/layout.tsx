@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-background text-foreground grid place-items-center min-h-screen`}
+        className={`${inter.className} bg-background text-foreground grid sm:place-items-center min-h-screen`}
       >
         {children}
       </body>

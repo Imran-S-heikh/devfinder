@@ -39,8 +39,8 @@ export default function Home() {
   }
 
   return (
-    <main className="w-[730px] ">
-      <section className="flex justify-between">
+    <main className="max-w-[730px] p-4 w-full block">
+      <section className="flex justify-between mt-4">
         <h2 className="font-bold text-2xl">devfinder</h2>
         <div className="">
           <ThemeSwitch />

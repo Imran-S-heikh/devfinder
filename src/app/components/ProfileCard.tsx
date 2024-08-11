@@ -8,6 +8,7 @@ import Hide from "@/components/Hide";
 import { Profile } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
+import CardSkeleton from "./CardSkeleton";
 
 function ProfileCard({
   profile,
@@ -17,59 +18,12 @@ function ProfileCard({
   loading: boolean;
 }) {
   if (loading) {
-    return (
-      <section className="bg-surface rounded-2xl p-12 mt-6 flex gap-9 drop-shadow-xl">
-        <div className="">
-          <div className="w-[117px] h-[117px] rounded-full bg-background animate-pulse"></div>
-        </div>
-        <div className="flex-1">
-          <div className="justify-between flex">
-            <div className="w-3/5 h-5 rounded bg-background animate-pulse"></div>
-            <div className="w-1/3 h-5 rounded bg-background animate-pulse"></div>
-          </div>
-          <p className="text-muted mt-6 w-full h-12 rounded bg-background animate-pulse"></p>
-          <div className="mt-8 px-8 py-4 bg-background rounded animate-pulse">
-            <div className="flex justify-between opacity-0">
-              <div>
-                <h2 className="text-xs text-muted">Repos</h2>
-                <h3 className="font-bold text-2xl">{profile?.repos || 0}</h3>
-              </div>
-              <div>
-                <h2 className="text-xs text-muted">Followers</h2>
-                <h3 className="font-bold text-2xl">
-                  {profile?.followers || 0}
-                </h3>
-              </div>
-              <div>
-                <h2 className="text-xs text-muted">Following</h2>
-                <h3 className="font-bold text-2xl">
-                  {profile?.following || 0}
-                </h3>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-9 grid grid-cols-2 gap-5 fill-muted text-muted">
-            <div className="flex gap-4">
-              <div className="w-full h-5 rounded bg-background animate-pulse"></div>
-            </div>
-            <div className="flex gap-4">
-              <div className="w-full h-5 rounded bg-background animate-pulse"></div>
-            </div>
-            <div className="flex gap-4">
-              <div className="w-full h-5 rounded bg-background animate-pulse"></div>
-            </div>
-            <div className="flex gap-4">
-              <div className="w-full h-5 rounded bg-background animate-pulse"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
+    return <CardSkeleton />;
   }
+
   return (
-    <section className="bg-surface rounded-2xl p-12 mt-6 flex gap-9 drop-shadow-xl">
-      <div className="">
+    <section className="bg-surface rounded-2xl xxl:p-12 p-6 mt-6 flex gap-9 drop-shadow-xl">
+      <div className="hidden sm:block">
         <Image
           height={117}
           width={117}
@@ -79,11 +33,25 @@ function ProfileCard({
         />
       </div>
       <div className="flex-1">
-        <div className="justify-between flex">
-          <h1 className="text-2xl font-bold">{profile?.name}</h1>
-          <h4 className="text-muted">Joined {profile?.join}</h4>
+        <div className="flex gap-8 items-center mb-6">
+          <div className="sm:hidden">
+            <Image
+              height={117}
+              width={117}
+              src={profile?.avatar!}
+              alt="avatar"
+              className="rounded-full"
+            />
+          </div>
+          <div className="flex-1 ">
+            <div className="justify-between flex flex-col sm:flex-row">
+              <h1 className="text-2xl font-bold">{profile?.name}</h1>
+              <h4 className="text-muted mt-2 sm:mt-0">Joined {profile?.join}</h4>
+            </div>
+            <h3 className="xxl:mb-6 mt-1 text-primary">@{profile?.handle}</h3>
+          </div>
         </div>
-        <h3 className="mb-6 mt-1 text-primary">@{profile?.handle}</h3>
+
         <p className="text-muted ">
           {profile?.bio || "This profile has no bio"}
         </p>
