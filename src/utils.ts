@@ -53,6 +53,7 @@ export interface Profile {
   twitter: string | null;
   github: string;
   location: string | null;
+  blog: string
 }
 
 export async function getProfile(username: string) {
@@ -83,6 +84,7 @@ export async function getProfile(username: string) {
     twitter: result.twitter_username,
     github: result.html_url,
     location: result.location,
+    blog: result.blog
   } as Profile;
 }
 
@@ -98,6 +100,7 @@ export const defaultProfile: Profile = {
   twitter: null,
   github: "https://github.com/Imran-S-heikh",
   location: "Bangladesh",
+  blog: ""
 };
 
 export function isServer() {

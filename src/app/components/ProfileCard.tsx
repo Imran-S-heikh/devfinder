@@ -4,8 +4,10 @@ import {
   IconTwitter,
   IconWebsite,
 } from "@/assets/icons";
+import Hide from "@/components/Hide";
 import { Profile } from "@/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 function ProfileCard({
   profile,
@@ -104,21 +106,47 @@ function ProfileCard({
 
         <div className="mt-9 grid grid-cols-2 gap-5 fill-muted text-muted">
           <div className="flex gap-4">
-            <IconLocation className="" />
+            <IconLocation className="min-w-5" />
             <h5>{profile?.location}</h5>
           </div>
-          <div className="flex gap-4">
-            <IconWebsite className="" />
-            <h5>Blog</h5>
-          </div>
-          <div className="flex gap-4">
-            <IconTwitter className="" />
-            <h5>Twitter</h5>
-          </div>
-          <div className="flex gap-4">
-            <IconCompany className="" />
-            <h5>@github</h5>
-          </div>
+          <Hide
+            open={profile?.blog}
+            fallback={
+              <div className="flex gap-4 items-center opacity-70">
+                <IconWebsite className="min-w-5" />
+                <h5>Website</h5>
+              </div>
+            }
+          >
+            <Link href={profile?.blog!}>
+              <div className="flex gap-4 items-center">
+                <IconWebsite className="min-w-5" />
+                <h5>Website</h5>
+              </div>
+            </Link>
+          </Hide>
+          <Hide
+            open={profile?.twitter}
+            fallback={
+              <div className="flex gap-4 items-center opacity-70">
+                <IconTwitter className="min-w-5" />
+                <h5>Twitter</h5>
+              </div>
+            }
+          >
+            <Link href={`https://twitter.com/${profile?.twitter}`}>
+              <div className="flex gap-4 items-center">
+                <IconTwitter className="min-w-5" />
+                <h5>Twitter</h5>
+              </div>
+            </Link>
+          </Hide>
+          <Link href={profile?.github!}>
+            <div className="flex gap-4">
+              <IconCompany className="min-w-5" />
+              <h5>GitHub</h5>
+            </div>
+          </Link>
         </div>
       </div>
     </section>
